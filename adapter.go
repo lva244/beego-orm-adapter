@@ -87,10 +87,10 @@ func (a *Adapter) open() error {
 
 	a.o = orm.NewOrmUsingDB(a.dataSourceAlias)
 
-	err = a.createTable()
-	if err != nil {
-		return err
-	}
+	// err = a.createTable()
+	// if err != nil {
+	// 	return err
+	// }
 
 	return nil
 }
@@ -99,13 +99,13 @@ func (a *Adapter) close() {
 	a.o = nil
 }
 
-func (a *Adapter) createTable() error {
-	return orm.RunSyncdb(a.dataSourceAlias, false, true)
-}
+// func (a *Adapter) createTable() error {
+// 	return orm.RunSyncdb(a.dataSourceAlias, false, true)
+// }
 
-func (a *Adapter) dropTable() error {
-	return orm.RunSyncdb(a.dataSourceAlias, true, true)
-}
+// func (a *Adapter) dropTable() error {
+// 	return orm.RunSyncdb(a.dataSourceAlias, true, true)
+// }
 
 func loadPolicyLine(line CasbinRule, model model.Model) {
 	lineText := line.Ptype
@@ -174,15 +174,15 @@ func savePolicyLine(ptype string, rule []string) CasbinRule {
 
 // SavePolicy saves policy to database.
 func (a *Adapter) SavePolicy(model model.Model) error {
-	err := a.dropTable()
-	if err != nil {
-		return err
-	}
+	// err := a.dropTable()
+	// if err != nil {
+	// 	return err
+	// }
 
-	err = a.createTable()
-	if err != nil {
-		return err
-	}
+	// err = a.createTable()
+	// if err != nil {
+	// 	return err
+	// }
 
 	var lines []CasbinRule
 
@@ -200,7 +200,7 @@ func (a *Adapter) SavePolicy(model model.Model) error {
 		}
 	}
 
-	_, err = a.o.InsertMulti(len(lines), lines)
+	_, err := a.o.InsertMulti(len(lines), lines)
 	return err
 }
 
